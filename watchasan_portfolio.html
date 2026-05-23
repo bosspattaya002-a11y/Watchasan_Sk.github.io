@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watchasan Songkamthanaset — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#F5F7FA;--off-white:#EEF1F7;
+  --blue-deep:#0A1628;--blue-mid:#0D2B5E;
+  --blue-accent:#1565C0;--blue-electric:#2979FF;
+  --cyan:#00B4D8;--cyan-light:#90E0EF;
+  --text-primary:#0A1628;--text-secondary:#3D4F6E;--text-muted:#7A8BA8;
+  --border:rgba(21,101,192,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;font-size:16px;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-primary);overflow-x:hidden;}
+
+/* FLUID ART */
+#fluid-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.20;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(245,247,250,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:all .3s ease;}
+.logo{font-family:'Unbounded',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.05em;color:var(--blue-accent);text-decoration:none;transition:opacity .2s;}
+.logo:hover{opacity:.7;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;position:relative;padding:.2rem 0;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--blue-electric);transition:width .3s ease;}
+.nav-links a:hover,.nav-links a.active{color:var(--blue-electric);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+
+/* SECTIONS */
+section{position:relative;min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6rem 3rem 3rem;}
+.section-inner{width:100%;max-width:1200px;margin:0 auto;}
+
+/* HOME */
+#home{background:linear-gradient(135deg,var(--white) 0%,var(--off-white) 100%);text-align:center;flex-direction:column;}
+.home-eyebrow{font-size:.75rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-electric);margin-bottom:1.5rem;animation:fadeUp .8s ease both;}
+.home-title{font-family:'Unbounded',sans-serif;font-size:clamp(2.2rem,5vw,4.5rem);font-weight:700;line-height:1.05;color:var(--blue-deep);margin-bottom:.5rem;animation:fadeUp .8s .15s ease both;}
+.home-title span{background:linear-gradient(90deg,var(--blue-electric),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.home-subtitle{font-size:clamp(.9rem,2vw,1.15rem);font-weight:300;color:var(--text-secondary);max-width:520px;margin:1.2rem auto 2.5rem;animation:fadeUp .8s .3s ease both;}
+.home-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .45s ease both;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border-radius:4px;font-size:.85rem;font-weight:500;letter-spacing:.05em;cursor:pointer;text-decoration:none;transition:all .25s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;border:none;}
+.btn-primary{background:var(--blue-electric);color:#fff;box-shadow:0 4px 24px rgba(41,121,255,.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(41,121,255,.45);}
+.btn-outline{border:1.5px solid var(--blue-electric)!important;color:var(--blue-electric);background:transparent;}
+.btn-outline:hover{background:var(--blue-electric);color:#fff;transform:translateY(-2px);}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bounce 2s infinite;cursor:pointer;}
+.scroll-indicator span{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);}
+.scroll-dot{width:1px;height:40px;background:linear-gradient(to bottom,var(--blue-electric),transparent);}
+
+/* ABOUT */
+#about{background:var(--off-white);}
+.about-grid{display:grid;grid-template-columns:320px 1fr;gap:4rem;align-items:start;}
+.about-photo-col{position:sticky;top:6rem;}
+.about-photo-wrap{position:relative;width:280px;}
+.about-photo-wrap::before{content:'';position:absolute;top:16px;left:16px;right:-16px;bottom:-16px;border:1.5px solid var(--cyan);border-radius:4px;z-index:0;opacity:.4;}
+.about-photo{position:relative;z-index:1;width:100%;aspect-ratio:3/4;border-radius:4px;border:1px solid var(--border);background:linear-gradient(135deg,var(--off-white),#D0DCF0);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.about-photo img{width:100%;height:100%;object-fit:cover;border-radius:4px;}
+.section-label{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-electric);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--blue-electric);flex-shrink:0;}
+.section-title{font-family:'Unbounded',sans-serif;font-size:clamp(1.8rem,3vw,3rem);font-weight:700;color:var(--blue-deep);line-height:1.1;margin-bottom:1.5rem;}
+.about-bio{font-size:1rem;line-height:1.8;color:var(--text-secondary);margin-bottom:2rem;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+.info-item label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:.25rem;}
+.info-item span{font-size:.9rem;color:var(--text-primary);}
+.skills-block{margin-bottom:1.5rem;}
+.skills-block h4{font-family:'Unbounded',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-accent);margin-bottom:.75rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.skill-tag{padding:.3rem .85rem;border-radius:2px;font-size:.75rem;letter-spacing:.05em;border:1px solid var(--blue-electric);color:var(--blue-electric);background:rgba(41,121,255,.05);transition:all .2s;cursor:default;}
+.skill-tag:hover{background:var(--blue-electric);color:#fff;}
+.software-icons{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem;}
+.sw-tag{padding:.25rem .7rem;border-radius:2px;font-size:.72rem;background:var(--blue-mid);color:#CBD5E8;font-weight:400;letter-spacing:.04em;}
+
+/* WORK */
+#work{background:var(--white);}
+.work-header{text-align:center;margin-bottom:4rem;}
+.work-grid{display:flex;flex-direction:column;gap:5rem;}
+.work-item{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.work-item:nth-child(even){direction:rtl;}
+.work-item:nth-child(even)>*{direction:ltr;}
+.work-thumb{aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,var(--blue-mid),var(--blue-accent));position:relative;border:1px solid var(--border);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.work-thumb:hover{transform:scale(1.02);}
+.work-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.work-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.3);text-align:center;padding:1rem;}
+.work-num{font-family:'Unbounded',sans-serif;font-size:.65rem;font-weight:700;color:var(--blue-electric);letter-spacing:.15em;margin-bottom:.75rem;}
+.work-title{font-family:'Unbounded',sans-serif;font-size:1.25rem;font-weight:700;color:var(--blue-deep);margin-bottom:.75rem;line-height:1.3;}
+.work-desc{font-size:.9rem;line-height:1.75;color:var(--text-secondary);margin-bottom:1rem;}
+.role-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem 1rem;border-radius:2px;background:var(--blue-electric);color:#fff;font-size:.72rem;font-weight:500;letter-spacing:.06em;margin-bottom:1.2rem;box-shadow:0 2px 12px rgba(41,121,255,.3);}
+.work-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--blue-electric);font-size:.82rem;font-weight:500;text-decoration:none;letter-spacing:.04em;transition:gap .2s,opacity .2s;}
+.work-link:hover{gap:.7rem;opacity:.75;}
+.work-link svg{width:14px;height:14px;flex-shrink:0;}
+
+/* EVENT */
+#event{background:var(--off-white);}
+.event-header{text-align:center;margin-bottom:3rem;}
+.event-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.event-card{background:var(--white);border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s;cursor:pointer;}
+.event-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(10,22,40,.1);}
+.event-thumb{aspect-ratio:16/9;overflow:hidden;background:linear-gradient(135deg,var(--blue-mid),var(--blue-accent));position:relative;}
+.event-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
+.event-card:hover .event-thumb img{transform:scale(1.05);}
+.event-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.35);text-align:center;padding:1rem;}
+.event-body{padding:1.25rem;}
+.event-role-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .75rem;border-radius:2px;background:rgba(0,180,216,.12);color:var(--cyan);border:1px solid rgba(0,180,216,.3);font-size:.68rem;font-weight:500;letter-spacing:.06em;margin-bottom:.75rem;}
+.event-title{font-family:'Unbounded',sans-serif;font-size:.9rem;font-weight:700;color:var(--blue-deep);margin-bottom:.5rem;line-height:1.3;}
+.event-desc{font-size:.8rem;line-height:1.65;color:var(--text-muted);}
+.event-link-row{display:flex;align-items:center;gap:.4rem;padding:.75rem 1.25rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--blue-electric);font-weight:500;letter-spacing:.04em;transition:background .2s;text-decoration:none;}
+.event-card:hover .event-link-row{background:rgba(41,121,255,.05);}
+
+/* slideshow dots */
+.slide-dots{display:flex;gap:4px;justify-content:center;padding:.5rem 0;border-top:1px solid var(--border);}
+.slide-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .3s;}
+.slide-dot.active{background:var(--blue-electric);}
+
+/* CONTACT */
+#contact{background:var(--blue-deep);color:#fff;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;width:100%;max-width:1200px;}
+.contact-headline{font-family:'Unbounded',sans-serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;line-height:1.1;}
+.contact-headline span{background:linear-gradient(90deg,var(--blue-electric),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.contact-sub{font-size:1rem;line-height:1.75;color:rgba(255,255,255,.5);margin-top:1.5rem;font-weight:300;font-style:italic;}
+.contact-list{display:flex;flex-direction:column;gap:1.25rem;}
+.contact-item{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit;transition:all .25s;}
+.contact-item:hover{background:rgba(41,121,255,.1);border-color:rgba(41,121,255,.3);transform:translateX(6px);}
+.contact-icon{width:40px;height:40px;border-radius:6px;flex-shrink:0;background:var(--blue-electric);display:flex;align-items:center;justify-content:center;}
+.contact-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.contact-meta label{display:block;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.2rem;}
+.contact-meta span{font-size:.88rem;color:rgba(255,255,255,.85);}
+
+/* BACK TO TOP */
+#back-top{position:fixed;bottom:2rem;right:2rem;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--blue-electric);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(41,121,255,.4);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.4,0,.2,1);}
+#back-top.show{transform:translateY(0);opacity:1;}
+#back-top:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(41,121,255,.55);}
+#back-top svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem;}
+  .nav-links{gap:1rem;}
+  section{padding:5rem 1.5rem 2rem;}
+  .about-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-photo-col{position:static;}
+  .about-photo-wrap{width:180px;}
+  .work-item,.work-item:nth-child(even){grid-template-columns:1fr;direction:ltr;}
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .info-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="fluid-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="logo">Watchasan S.</a>
+  <ul class="nav-links">
+    <li><a href="#home" data-section="home">Home</a></li>
+    <li><a href="#about" data-section="about">About</a></li>
+    <li><a href="#work" data-section="work">Work</a></li>
+    <li><a href="#event" data-section="event">Event</a></li>
+    <li><a href="#contact" data-section="contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="section-inner" style="text-align:center;position:relative;z-index:1;">
+    <p class="home-eyebrow">Video Editor · Director of Photography · Content Creator</p>
+    <h1 class="home-title">Watchasan<br><span>Songkamthanaset</span></h1>
+    <p class="home-subtitle">สร้างสรรค์ทุกเฟรม ถ่ายทอดทุกความรู้สึก —<br>Crafting stories through the lens, one frame at a time.</p>
+    <div class="home-ctas">
+      <a href="#work" class="btn btn-primary">View My Work ↓</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner about-grid reveal">
+    <div class="about-photo-col">
+      <div class="about-photo-wrap">
+        <div class="about-photo">
+          <!-- Google Drive profile photo via proxy -->
+          <img id="profile-img"
+            src="https://lh3.googleusercontent.com/d/1SpnBitGaOEGuX8aDAR0kYu23QlgY-08X"
+            alt="Watchasan Songkamthanaset"
+            onerror="this.src='https://ui-avatars.com/api/?name=Watchasan+S&size=400&background=1565C0&color=fff&bold=true'">
+        </div>
+      </div>
+      <div style="margin-top:2rem;">
+        <div class="section-label">Quick Contact</div>
+        <div style="display:flex;flex-direction:column;gap:.65rem;margin-top:.5rem;">
+          <a href="mailto:bosspattaya002@gmail.com" style="font-size:.82rem;color:var(--blue-electric);text-decoration:none;display:flex;align-items:center;gap:.4rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            bosspattaya002@gmail.com</a>
+          <a href="tel:0947862002" style="font-size:.82rem;color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:.4rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.1-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7 12.8 12.8 0 00.7 2.8 2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5 12.8 12.8 0 002.8.7A2 2 0 0122 16.9z"/></svg>
+            094-786-2002</a>
+          <a href="https://www.instagram.com/watchasan_s_k/" target="_blank" style="font-size:.82rem;color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:.4rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @watchasan_s_k</a>
+        </div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Hello,<br>I'm Watchasan.</h2>
+      <p class="about-bio">นักศึกษาสาขาการสร้างสรรค์คอนเทนต์ดิจิทัล วิทยาลัยนิเทศศาสตร์ มหาวิทยาลัยรังสิต อายุ 21 ปี มีความหลงใหลในการถ่ายทำและตัดต่อวิดีโอ สนุกกับการเล่าเรื่องผ่านภาพ ทุกเฟรมคือความรู้สึก ทุกคลิปคือเรื่องราวที่อยากให้โลกได้เห็น</p>
+      <div class="info-grid">
+        <div class="info-item"><label>Date of Birth</label><span>15 มิถุนายน 2547 (Age 21)</span></div>
+        <div class="info-item"><label>Location</label><span>ปทุมธานี, ประเทศไทย</span></div>
+        <div class="info-item"><label>University</label><span>Rangsit University — DCC</span></div>
+        <div class="info-item"><label>Year</label><span>ปี 2566–2569</span></div>
+      </div>
+      <div class="skills-block">
+        <h4>Soft Skills</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">สื่อสารเป็นเยี่ยม</span><span class="skill-tag">ทำงานใต้แรงกดดัน</span><span class="skill-tag">กล้าแสดงออก</span><span class="skill-tag">เปิดรับสิ่งใหม่</span><span class="skill-tag">Problem Solving</span><span class="skill-tag">ใส่ใจรายละเอียด</span><span class="skill-tag">Team Player</span>
+        </div>
+      </div>
+      <div class="skills-block">
+        <h4>Hard Skills</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Video Editing</span><span class="skill-tag">Camera Composition</span><span class="skill-tag">Director of Photography</span><span class="skill-tag">Color Grading</span><span class="skill-tag">Post-Production</span>
+        </div>
+      </div>
+      <div class="skills-block">
+        <h4>Software</h4>
+        <div class="software-icons">
+          <span class="sw-tag">Premiere Pro</span><span class="sw-tag">After Effects</span><span class="sw-tag">DaVinci Resolve</span><span class="sw-tag">Photoshop</span><span class="sw-tag">Lightroom</span><span class="sw-tag">Illustrator</span><span class="sw-tag">CapCut</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-inner">
+    <div class="work-header reveal">
+      <div class="section-label" style="justify-content:center;">Production Portfolio</div>
+      <h2 class="section-title">Selected Work</h2>
+    </div>
+    <div class="work-grid" id="work-grid"></div>
+  </div>
+</section>
+
+<!-- EVENT -->
+<section id="event">
+  <div class="section-inner">
+    <div class="event-header reveal">
+      <div class="section-label" style="justify-content:center;">Events & Activities</div>
+      <h2 class="section-title">Events</h2>
+    </div>
+    <div class="event-grid" id="event-grid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid reveal">
+    <div>
+      <h2 class="contact-headline">Let's Create<br><span>Something</span><br>Unforgettable.</h2>
+      <p class="contact-sub">"ทุกประสบการณ์คือการเรียนรู้<br>และผมต้องการประสบการณ์ที่มีค่ามากๆ"</p>
+    </div>
+    <div class="contact-list">
+      <a href="mailto:bosspattaya002@gmail.com" class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+        <div class="contact-meta"><label>Email</label><span>bosspattaya002@gmail.com</span></div>
+      </a>
+      <a href="https://www.instagram.com/watchasan_s_k/" target="_blank" class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg></div>
+        <div class="contact-meta"><label>Instagram</label><span>@watchasan_s_k</span></div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+        <div class="contact-meta"><label>Line ID</label><span>bosspattaya002</span></div>
+      </div>
+      <a href="tel:0947862002" class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.1-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7 12.8 12.8 0 00.7 2.8 2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5 12.8 12.8 0 002.8.7A2 2 0 0122 16.9z"/></svg></div>
+        <div class="contact-meta"><label>Tel</label><span>094-786-2002</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="18,15 12,9 6,15"/></svg>
+</button>
+
+<script>
+/* ============================
+   FLUID ART — 20% opacity, always animated
+   ============================ */
+(function(){
+  const c=document.getElementById('fluid-canvas');
+  const cx=c.getContext('2d');
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize(); window.addEventListener('resize',resize);
+
+  const NUM=10;
+  const COLORS=['#0D47A1','#1565C0','#1976D2','#2979FF','#0288D1','#00B4D8','#006064','#0097A7','#01579B','#0277BD'];
+  const blobs=Array.from({length:NUM},(_,i)=>({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    vx:(Math.random()-.5)*.5,
+    vy:(Math.random()-.5)*.5,
+    r:120+Math.random()*200,
+    color:COLORS[i%COLORS.length],
+    phase:Math.random()*Math.PI*2,
+    spd:.002+Math.random()*.003
+  }));
+
+  function draw(){
+    cx.clearRect(0,0,c.width,c.height);
+    blobs.forEach(b=>{
+      b.x+=b.vx; b.y+=b.vy; b.phase+=b.spd;
+      if(b.x<-b.r)b.x=c.width+b.r;
+      if(b.x>c.width+b.r)b.x=-b.r;
+      if(b.y<-b.r)b.y=c.height+b.r;
+      if(b.y>c.height+b.r)b.y=-b.r;
+      const pr=b.r*(1+Math.sin(b.phase)*.18);
+      const g=cx.createRadialGradient(b.x,b.y,0,b.x,b.y,pr);
+      g.addColorStop(0,b.color+'AA');
+      g.addColorStop(.45,b.color+'44');
+      g.addColorStop(1,'transparent');
+      cx.beginPath(); cx.arc(b.x,b.y,pr,0,Math.PI*2);
+      cx.fillStyle=g; cx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ============================
+   WORK DATA — YouTube thumbnails + provided covers
+   ============================ */
+function ytThumb(url){
+  // extract video id from various YouTube URL formats
+  const m=url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/)([^?&\s]+)/);
+  if(m)return `https://img.youtube.com/vi/${m[1]}/maxresdefault.jpg`;
+  return '';
+}
+function gdImgUrl(id){return `https://lh3.googleusercontent.com/d/${id}`;}
+
+const works=[
+  {n:'01',title:'Choice ทางเลือก',desc:'ภาพยนตร์สั้นประกวด รายการ The Annual National Student Arts and Crafts Fair 70th — รางวัลเหรียญทอง ระดับชาติ ภาคกลางและภาคตะวันออก',role:'Video Editor / Director of Photography',link:'https://youtu.be/7jzvgYWZ-6I?si=0U-eZYDmpNPRCPrl',cover:ytThumb('https://youtu.be/7jzvgYWZ-6I')},
+  {n:'02',title:'Vibe Square EP.11–14',desc:'รายการที่เปิดพื้นที่สาธารณะให้กับวงการดนตรี เพื่อให้ทุกคนได้เข้าถึงเสียงของดนตรี',role:'Set Production Assistant',link:'https://youtube.com/playlist?list=PLoT4vr09MwKYwwnGSd_1vc39tLI29paHY',cover:gdImgUrl('1WINHdUmpzYfZFaPMxnXz7tUPK7LJP1CO')},
+  {n:'03',title:'MIXGEN THE FINAL MEMORIES',desc:'ภาพยนตร์สั้นที่หยิบยกประเด็น Generation มานำเสนอ เพื่อให้คนได้ย้อนคิดถึงสิ่งที่อาจขาดหายไป',role:'Video Editor / Director of Photography',link:'https://youtu.be/gAg4YeqpBgg?si=Dpd-cstFQb8GIuMD',cover:ytThumb('https://youtu.be/gAg4YeqpBgg')},
+  {n:'04',title:'MV Cover เพื่อน(ไม่)สนิท',desc:'MV ส่งประกวดรายการ เพื่อน(ไม่)สนิท ของทาง GDH',role:'Video Editor',link:'https://youtu.be/DSyqERytYhI?si=I2Y81jzlNMs_z0m5',cover:ytThumb('https://youtu.be/DSyqERytYhI')},
+  {n:'05',title:'MV ฮีลใจ (heal jai) Cover',desc:'ผลงานของรายวิชา RSU111 สังคมธรรมาธิปไตย โดยนักศึกษา ม.รังสิต ชั้นปีที่ 1',role:'Video Editor',link:'https://youtu.be/JtryviZ7nnQ?si=bK3IF9iTcIAdu1UR',cover:ytThumb('https://youtu.be/JtryviZ7nnQ')},
+  {n:'06',title:'Perfume X Make up Show',desc:'เทศกาลน้ำหอมที่รวมหลากหลายแบรนด์ของคนไทยเข้าด้วยกัน',role:'Video Editor / Director of Photography',link:'https://www.facebook.com/share/v/1E8PoAYqyr/',cover:gdImgUrl('14ijR1RVjBzUcuKU9k3ocBVvIGOREBAPQ')},
+  {n:'07',title:"L'CLOCHE — Brand Film",desc:"Video แนะนำ Product ใหม่ของทางแบรนด์น้ำหอม L'CLOCHE by Scent Mastery — คุณเบล ณัฐวุฒิ",role:'Video Editor',link:'https://www.facebook.com/share/v/18Bpn4Uvjh/',cover:gdImgUrl('11mtIPkIlBja8BbNTltl33HVald02PBSW')},
+  {n:'08',title:'MV Memories Are Still Beautiful',desc:'เรื่องราวของผู้หญิงที่ไม่สามารถลืมอดีต เล่าเรื่องผ่านสิ่งของ 1 ชิ้น',role:'Video Editor / Director of Photography',link:'https://youtu.be/0a8GnOZdyN8?si=FQ4y7C3-bGzPQMKO',cover:ytThumb('https://youtu.be/0a8GnOZdyN8')},
+  {n:'09',title:'Daran — Kapolo Production',desc:'ผลงาน Final ประจำปีการศึกษา 2025',role:'Video Editor',link:'https://youtu.be/q5NuOQBRxhE?si=_QwQxOXBTnuG2jse',cover:ytThumb('https://youtu.be/q5NuOQBRxhE')},
+  {n:'10',title:'The Call of Justice',desc:'ผลงาน Final ประจำปีการศึกษา 2026 — Kapolo Production',role:'Video Editor',link:'https://youtu.be/pVzdvjQATAc?si=BembzS4c4otrXh4O',cover:ytThumb('https://youtu.be/pVzdvjQATAc')},
+  {n:'11',title:'LOVE OR DIE',desc:'ผลงาน Final ประจำปีการศึกษา 2025 — Kapolo Production',role:'Video Editor',link:'https://youtu.be/EYbhsI9xpEM?si=Lhq3mVHVwiYEckWP',cover:ytThumb('https://youtu.be/EYbhsI9xpEM')},
+  {n:'12',title:'Cinematic Vlog : Life',desc:'Cinematic Vlog ชีวิตที่แสนจำเจ Ref จากช่อง Sleepy Charlie',role:'Video Editor / DoP / Creative',link:'https://drive.google.com/file/d/1bvmG35PlhAD9CycqkGJ303mD0SlcdFTy/view',cover:gdImgUrl('152bJtSiUNq65cA84GnnTo7t8OM42TNNl')},
+  {n:'13',title:'Video Tape Recorder — DCC BTS',desc:'เบื้องหลังการทำงานของพี่ๆ DCC ในเทศกาลนิเทศสัญจรสู่ภูมิภาค',role:'Video Editor / Director of Photography',link:'https://www.facebook.com/share/v/1CRbk3QvVK/',cover:gdImgUrl('1uTcId4KjMfl3jwmWZk-iMbxASqXj0f_b')},
+  {n:'14',title:'V-log TRIP .01 Ratchaburi',desc:'คลิปการท่องเที่ยวกับเพื่อนๆ ที่ราชบุรี แบบไม่มีแผน',role:'Video Editor / DoP / Creative',link:'https://youtu.be/5S3P_QrD0ws?si=W7cup-TPOGBA4_K-',cover:ytThumb('https://youtu.be/5S3P_QrD0ws')},
+  {n:'15',title:'Last Day DCC Gen 1',desc:'บรรยากาศการรับใบปริญญาของพี่ๆ DCC Gen 1',role:'Video Editor / DoP / Creative',link:'https://www.facebook.com/share/v/1BLqty5EAt/',cover:gdImgUrl('1xiNtQbBIx3eOHxAKR1YUgQvy9hO4HQfo')},
+  {n:'16',title:'DCC Journey Behind The Brief 2025',desc:'งานเล่าประสบการณ์ฝึกงานของพี่ DCC ปี 4 เพื่อเป็นแนวทางให้น้องๆ',role:'Director of Photography',link:'https://www.facebook.com/share/v/18XErT5m4g/',cover:gdImgUrl('1T1ImtRERn1Uap7KKuF3zUkzoZuXO242o')},
+  {n:'17',title:'Mini Heart Mega Heart',desc:'ภารกิจ "เติมใจให้เต็ม" จากวันเซ็ตอัพสู่วันงานที่มีแต่รอยยิ้ม',role:'Director of Photography',link:'https://www.facebook.com/share/v/1ArDnm8VTK/',cover:gdImgUrl('1jcjuubYHtNV4SX2C7tKeYigWIAIfLzub')},
+  {n:'18',title:'The Multiverse of Creation',desc:'คลิปโปรโมทบรรยากาศงาน DCC Open House 2567',role:'Video Editor / DoP / Creative',link:'https://www.facebook.com/share/v/1HyuFWHkty/',cover:gdImgUrl('1Q-FpW4Z2DrMsZgWnEnwjqH2lQFlDT3s9')},
+  {n:'19',title:'[Cover MV] อาวรณ์ — POLYCAT',desc:'ผลงานรายวิชา DCC242 ปฏิบัติการผลิตและหลังการผลิตสำหรับสื่อดิจิทัล',role:'Supporting Actor',link:'https://www.facebook.com/share/v/1D24cc9ZvU/',cover:gdImgUrl('1S3qq9K0rOxXewhqeTdFoFI0w-g66vGPv')},
+  {n:'20',title:'Content Creator สู่ Lecturer',desc:'ชีวิตนักแนะแนวออนไลน์สู่บทบาทอาจารย์ผู้สอน จาก YouTube Channel Keep LearningTH',role:'Video Editor / Director of Photography',link:'https://youtu.be/7JtU5Q5nM2o?si=oA1yUTsRF39Z6qV5',cover:ytThumb('https://youtu.be/7JtU5Q5nM2o')},
+  {n:'21',title:'อยากเที่ยวแต่ไม่มีเงินทำยังไงดี?',desc:'คอนเทนต์เกี่ยวกับการไปเที่ยวฉบับคนไม่มีเงิน',role:'Video Editor / DoP / Creative',link:'https://youtu.be/XjRGtwtH0xs?si=czgvqftnibRyiziC',cover:ytThumb('https://youtu.be/XjRGtwtH0xs')},
+  {n:'22',title:'ภาพยนตร์สั้น มารักหรือมาหลอก',desc:'หนังสั้นเกี่ยวกับภัยบนโลกออนไลน์ในโครงการ มิตรสู้มิจ',role:'Video Editor / Director of Photography',link:'https://drive.google.com/file/d/17EAs_RleiqcZRlqGmmP749PWw66WiDZu/view',cover:gdImgUrl('17MaKV6wTkOwWAfEP_NPZAQ_yWbwlIGkL')},
+  {n:'23',title:'Video Tape Recorder — กีฬาสี DCC',desc:'กิจกรรมประจำสาขาการสร้างสรรค์คอนเทนต์ดิจิทัล ประจำปีการศึกษา 2567',role:'Video Editor / DoP / Creative',link:'https://drive.google.com/file/d/1k-s5wYYSwPN7Mm42TNNl/view',cover:gdImgUrl('1okTIt7OlT9GOP_Qa1kl0l00McLeBUJWS')},
+  {n:'24',title:'ระหว่างรอเรียนทำอะไรกันดี?',desc:'คลิปคอนเทนต์สั้นตอบปัญหาว่าระหว่างรอเรียนควรทำอะไรกันดี',role:'Video Editor / Director of Photography',link:'https://drive.google.com/file/d/1GwGsaVanG78yLSVakNaWikImWVHusxAN/view',cover:gdImgUrl('1PCq2yB09_Rm9Idq2Js_BNN1fminpKXud')},
+  {n:'25',title:'Life of Car',desc:'เรื่องราวของรถหนึ่งคันที่ผ่านอะไรมาบ้างจนกลายเป็นซาก และรอวันที่จะกลับมาวิ่งได้อีกครั้ง',role:'Video Editor / DoP / Creative',link:'https://www.tiktok.com/@boss_sos47/video/7428692439826746642',cover:gdImgUrl('1qRL1DdxJyg1zgWj_PfVP5asQ_QvDnabg')},
+  {n:'26',title:'Teaser บริษัท M2M',desc:'M2M บริษัทที่ให้โอกาสผู้กำกับหน้าใหม่ ผลงานส่วนหนึ่งของรายวิชา DCC 231',role:'Video Editor / DoP / Creative / Actor',link:'https://youtu.be/bx1VGSiqQws?si=AkUl7aM_kjm1XMKD',cover:ytThumb('https://youtu.be/bx1VGSiqQws')},
+  {n:'27',title:'Cover MV ปล่อยปาก',desc:'เรื่องราวของเพื่อนที่แอบแฝงความรู้สึกไว้ จนถึงเวลาที่จะบอกกลับสายไปเสียแล้ว',role:'Video Editor',link:'https://youtu.be/QvduyUiOHVQ?si=F91K0bS_DOqVt01Q',cover:ytThumb('https://youtu.be/QvduyUiOHVQ')},
+  {n:'28',title:'THAI LAND MARK — Ratchaburi',desc:'รายการท่องเที่ยวที่แบ่งออกเป็น 5 ep',role:'Video Editor',link:'https://drive.google.com/file/d/1H4VyliJ22sPPmXKp-x5YQW3jsJtxAhV8/view',cover:gdImgUrl('1_pFNYWctjno2XxYP1ni_enxhw0fD4jnM')},
+  {n:'29',title:'เส้นสร้างเรื่อง — อุด้งต้มยำ',desc:'รายการเกี่ยวกับประวัติศาสตร์และการทำอาหารจากเส้นหลายชนิด',role:'Video Editor',link:'https://drive.google.com/file/d/1GW5lacxYxxiuU61ooNJ4nHaXx2TBIAvy/view',cover:gdImgUrl('1LUUsNKbCsBU5VedVN0veFz4hUiRQeClO')},
+  {n:'30',title:'เส้นสร้างเรื่อง — ลาบพาสต้า',desc:'รายการเกี่ยวกับประวัติศาสตร์และการทำอาหารจากเส้นหลายชนิด',role:'Video Editor / Director of Photography',link:'https://drive.google.com/file/d/1xr197RatlJIqPJBWAyATa6QfPuAYZRGf/view',cover:gdImgUrl('1VhiZKXyX6M0JicHKaLnm7btbQjQaCBDM')},
+];
+
+const wg=document.getElementById('work-grid');
+const TOTAL=works.length;
+works.forEach((w,i)=>{
+  const el=document.createElement('div');
+  el.className='work-item reveal';
+  el.innerHTML=`
+    <div class="work-thumb" onclick="window.open('${w.link}','_blank')">
+      <img src="${w.cover}" alt="${w.title}" loading="lazy"
+        onerror="this.parentElement.innerHTML='<div class=\\'work-thumb-placeholder\\'>${w.n}</div>'">
+    </div>
+    <div>
+      <div class="work-num">${w.n} / ${String(TOTAL).padStart(2,'0')}</div>
+      <h3 class="work-title">${w.title}</h3>
+      <div class="role-badge">⬥ ${w.role}</div>
+      <p class="work-desc">${w.desc}</p>
+      <a href="${w.link}" target="_blank" class="work-link">View Project
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>`;
+  wg.appendChild(el);
+});
+
+/* ============================
+   EVENT DATA — slideshow from Google Drive folders
+   ============================ */
+// Each event has multiple photo IDs to rotate through (grabbed from folder listing)
+const events=[
+  {
+    title:'DCC OPENHOUSE 2566',
+    desc:'จัดการด้านการประสานงานกับแต่ละฝ่ายของทางคณะนิเทศศาสตร์และดูแลด้านเทคนิค',
+    role:'Technical Director & Coordinator',
+    folder:'https://drive.google.com/drive/folders/1mxauX07GdO8_gbLtLN62Z2h580vBXaAq',
+    photos:['18o4TmL3oe33Gx2Wh1KjrShxGrMwDUxoJ','1uTNSvcxQr2q6_DyY_2QGzrzSZCV8ZYBq','13B0nZeHsevly9Nlg5OQua378yHykoR_f','1udBTGnQjW-hBw-WtX_VxhLaq-Ye5eCLV']
+  },
+  {
+    title:'DCC บายศรีสู่ขวัญ 2567',
+    desc:'จัดการด้านการประสานงานกับแต่ละฝ่ายของทางคณะนิเทศศาสตร์และดูแลด้านเทคนิค',
+    role:'Technical Director & Coordinator & Camera',
+    folder:'https://drive.google.com/drive/folders/1Pe-XWcyhC7DxINhx2dy3XRCbiJ_G3505',
+    photos:['1LSTIcxXobPDOXaPJ4q-ZjBBqpXxEHjha','1jleuQenpEUbr557iwz-HGHulVwpBv_0S','1AjldZzgagMJoHQWgXkbIOAaVjN11LRpV','1jdQhBEsCpRd1LOXffz-B5gBODUrvxTge','1QoAjxTb7IU3XRVfUq3x0BRxXw1N3rM41','14MtsxDPhMlGEuriwGcfQwX_PGZllKVzU']
+  },
+  {
+    title:'AUTHENTIC IDENTITY',
+    desc:'งานร่วมมหาวิทยาลัยต่างๆ โดยมี ม.รังสิต เป็นเจ้าภาพ มีผู้เชี่ยวชาญมาพูดเกี่ยวกับ AI',
+    role:'Technical Director',
+    folder:'https://drive.google.com/drive/folders/1d9mPC8lfVt1kp8Zj8S9JLiihgsz5JSPF',
+    photos:['1FeuoZ5oTs1VQDZ2zkx6ybTyX15-e76bg','18dIXb4235vDxMzDlIWGHC6TSqK9CMegi','1IaIGLTwkSzlCW8P_8174Mw4UGHEYYG7s','1htCH7YlsuEHFHfDsFRdeZZIsEb-fPWcm']
+  },
+  {
+    title:'DCC Journey Behind The Brief 2025',
+    desc:'งานให้พี่ DCC ปี 4 เล่าประสบการณ์ฝึกงาน เพื่อเป็นแนวทางให้น้องๆ ทุกชั้นปี',
+    role:'Technical Director',
+    folder:'https://drive.google.com/drive/folders/1ffvliFbaQ1XZ-Dvrnf20MMfaaglyfBpq',
+    photos:['1u_1jMBfylDc3HVBmL_LThLSnxEyIE5Jv','1HYgwq3AVvFSxEiKWIZ7cZEkZzCkPOVgy']
+  },
+  {
+    title:'นิเทศสัญจร — เพชรบุรี',
+    desc:'กิจกรรมให้ความรู้กับน้องๆ นักเรียนที่กำลังค้นหาตัวเองว่าชอบสิ่งไหน',
+    role:'Editor & Mentor & Team Leader',
+    folder:'https://drive.google.com/drive/folders/1OglShrQmBCwWWMmv6H7saRWvgmLkq6K-',
+    photos:['1N3-Q1SStBORenVOSzC_NtQno1aZ_Tj2J','1MZnGlcLl3OudElOzouN1U2JqxAnxPTWn','1Oj2zSWIEPp81JaQdnR04yXygjm0qlXEt','1GOjlny_3Qn6dlBJRZXXFZyhGBTBqiSD2','1ONk8nyfSa2-X6HJJkGAskhcR8SSGr-A4','146-ZI4aVcGOsYIz_i5QGMQXv5XPu2tum','10zemz0viIaKiCWpKM3oPuR7b8LDC9onU','1FT26yvbj1sNuFEGHa7shkT1szrVtPMMm']
+  },
+  {
+    title:'นิเทศสัญจร — อ่างทอง',
+    desc:'กิจกรรมให้ความรู้กับน้องๆ นักเรียนที่กำลังค้นหาตัวเองว่าชอบสิ่งไหน',
+    role:'Editor & Mentor & Team Leader & Camera',
+    folder:'https://drive.google.com/drive/folders/1FzCigEsUD-VTeKW8UpXwRi3DVh6E71cZ',
+    photos:['1MC8FzrSvD25nODU_9Xg5sRREUYJ5BL4h','1s0jZKb2xC6Bz9T7XcmwWEAqE-oEQurWH','19fapt1hs3Wx2IvGs0B0F44vPZvWMHpJk','1Fonrb-_EUpiDtGua3e1MUjfnt-xsaCYw']
+  },
+  {
+    title:'เทศกาลนิเทศสอนเกรียน',
+    desc:'กิจกรรมให้ความรู้กับน้องๆ นักเรียนที่สนใจในงานด้านนิเทศศาสตร์',
+    role:'Mentor & Team Leader',
+    folder:'https://drive.google.com/drive/folders/1gGQa4nW6E0uaQzShR5_A79zGhiAwQAaS',
+    photos:['1p9Kz2DTVPDoW2cxUdG63xxHONXrNreRZ','1I6CuqnIqjlGwAcOFBB1khgWDaReaWoHz','1mOKcIawUIGGGciIQUbJLhsITEvfBhmAT','1JzKBX4_nV_ixDQWAd_QmYo1RBjhcCy5U','1dR4ZrgL0aswt5zFmIOzppya71VTPvh1o']
+  },
+];
+
+const eg=document.getElementById('event-grid');
+events.forEach(ev=>{
+  const el=document.createElement('div');
+  el.className='event-card reveal';
+  const hasMulti=ev.photos.length>1;
+  const slideId='slide-'+Math.random().toString(36).slice(2);
+  el.innerHTML=`
+    <div class="event-thumb" id="${slideId}">
+      <img src="https://lh3.googleusercontent.com/d/${ev.photos[0]}" alt="${ev.title}" loading="lazy"
+        onerror="this.parentElement.innerHTML='<div class=\\'event-thumb-placeholder\\'>${ev.title}</div>'">
+    </div>
+    <div class="event-body">
+      <div class="event-role-badge">⬦ ${ev.role}</div>
+      <h3 class="event-title">${ev.title}</h3>
+      <p class="event-desc">${ev.desc}</p>
+    </div>
+    ${hasMulti?`<div class="slide-dots">${ev.photos.map((_,i)=>`<div class="slide-dot${i===0?' active':''}"></div>`).join('')}</div>`:''}
+    <a href="${ev.folder}" target="_blank" class="event-link-row">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+      View Photo Album ↗
+    </a>`;
+
+  // Slideshow rotation for cards with multiple photos
+  if(hasMulti){
+    let cur=0;
+    const dots=el.querySelectorAll('.slide-dot');
+    setInterval(()=>{
+      cur=(cur+1)%ev.photos.length;
+      const img=document.querySelector('#'+slideId+' img');
+      if(img){
+        img.style.opacity='0';
+        setTimeout(()=>{
+          img.src=`https://lh3.googleusercontent.com/d/${ev.photos[cur]}`;
+          img.style.opacity='1';
+        },300);
+      }
+      dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+    },3000);
+    // Add transition to img
+    setTimeout(()=>{
+      const img=document.querySelector('#'+slideId+' img');
+      if(img)img.style.transition='opacity .3s';
+    },100);
+  }
+  eg.appendChild(el);
+});
+
+/* ============================
+   SCROLL SPY + REVEAL
+   ============================ */
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a[data-section]');
+const reveals=document.querySelectorAll('.reveal');
+const backBtn=document.getElementById('back-top');
+
+function onScroll(){
+  // spy
+  let cur='';
+  sections.forEach(s=>{if(s.getBoundingClientRect().top<=120)cur=s.id;});
+  navLinks.forEach(a=>a.classList.toggle('active',a.dataset.section===cur));
+  // reveal
+  reveals.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('visible');});
+  // back to top
+  backBtn.classList.toggle('show',window.scrollY>400);
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+</script>
+</body>
+</html>
